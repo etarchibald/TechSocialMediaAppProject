@@ -15,32 +15,50 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     
+    var userProfile = UserProfile(firstName: "", lastName: "", userName: "", userUUID: UUID(), bio: "", techInterests: "", posts: [])
+    private var userProfileController = UserProfileController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        // Do any additional setup after loading the view.
+        getUserProfile()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func getUserProfile() {
+        
+        self.tableView.reloadData()
+        
+        let userQueryItem = URLQueryItem(name: "userUUID", value: User.current?.userUUID.uuidString)
+        let secretQueryItem = URLQueryItem(name: "userSecret", value: User.current?.secret.uuidString)
+        
+        Task {
+            do {
+                userProfile = try await userProfileController.fetchUserProfile(matching: [userQueryItem, secretQueryItem])
+                updateUI()
+            } catch {
+                print(error)
+            }
+        }
     }
-    */
-
+    
+    func updateUI() {
+        techInterestsLabel.text = userProfile.techInterests
+        bioLabel.text = userProfile.bio
+        fullNameLabel.text = "\(userProfile.firstName) \(userProfile.lastName)"
+        userNameLabel.text = userProfile.userName
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return userProfile.posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! PostsTableViewCell
+        
+        return cell
     }
 }

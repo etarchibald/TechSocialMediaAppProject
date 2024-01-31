@@ -12,8 +12,8 @@ struct UserProfile: Codable {
     var lastName: String
     var userName: String
     var userUUID: UUID
-    var bio: String
-    var techInterests: String
+    var bio: String?
+    var techInterests: String?
     var posts: [Post]
     
     enum CodingKeys: CodingKey {
