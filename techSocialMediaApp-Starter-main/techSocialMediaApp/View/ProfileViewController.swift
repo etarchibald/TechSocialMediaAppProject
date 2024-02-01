@@ -25,6 +25,10 @@ class ProfileViewController: UIViewController {
         getUserProfile()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        getUserProfile()
+    }
+    
     func getUserProfile() {
         
         self.tableView.reloadData()
@@ -48,6 +52,10 @@ class ProfileViewController: UIViewController {
         fullNameLabel.text = "\(userProfile.firstName) \(userProfile.lastName)"
         userNameLabel.text = userProfile.userName
     }
+    
+    @IBSegueAction func editProfile(_ coder: NSCoder, sender: Any?) -> EditProfileViewController? {
+        return EditProfileViewController(coder: coder, secret: User.current!.secret, userName: userProfile.userName, bio: userProfile.bio ?? "", techInterests: userProfile.techInterests ?? "")
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -58,6 +66,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! PostsTableViewCell
+        
+        let post = userProfile.posts[indexPath.row]
+        
+        cell.updateUI(using: post)
         
         return cell
     }
