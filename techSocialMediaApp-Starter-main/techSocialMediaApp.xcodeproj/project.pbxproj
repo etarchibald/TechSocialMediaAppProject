@@ -16,6 +16,8 @@
 		4AA5E24C2B6B1ACD00B89431 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E24B2B6B1ACD00B89431 /* EditProfileViewController.swift */; };
 		4AA5E25B2B6D3A3800B89431 /* Success.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E25A2B6D3A3800B89431 /* Success.swift */; };
 		4AA5E2602B6D46BC00B89431 /* PostProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E25F2B6D46BC00B89431 /* PostProfile.swift */; };
+		4AA5E2622B6D999300B89431 /* PostPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2612B6D999300B89431 /* PostPost.swift */; };
+		4AA5E2642B6D9C7C00B89431 /* AddEditPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2632B6D9C7C00B89431 /* AddEditPostController.swift */; };
 		A3C2D4CD2908297000C0AF5F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C2D4CC2908297000C0AF5F /* User.swift */; };
 		A3C2D4CF29082B1300C0AF5F /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */; };
 		A3C2D4D129082BF900C0AF5F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C2D4D029082BF900C0AF5F /* API.swift */; };
@@ -37,6 +39,8 @@
 		4AA5E24B2B6B1ACD00B89431 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = techSocialMediaApp/EditProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		4AA5E25A2B6D3A3800B89431 /* Success.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Success.swift; path = techSocialMediaApp/Network/Success.swift; sourceTree = SOURCE_ROOT; };
 		4AA5E25F2B6D46BC00B89431 /* PostProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProfile.swift; sourceTree = "<group>"; };
+		4AA5E2612B6D999300B89431 /* PostPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPost.swift; sourceTree = "<group>"; };
+		4AA5E2632B6D9C7C00B89431 /* AddEditPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddEditPostController.swift; path = techSocialMediaApp/Models/PostModels/AddEditPostController.swift; sourceTree = SOURCE_ROOT; };
 		A3C2D4CC2908297000C0AF5F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		A3C2D4D029082BF900C0AF5F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -76,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				4AA5E25F2B6D46BC00B89431 /* PostProfile.swift */,
+				4AA5E2612B6D999300B89431 /* PostPost.swift */,
 			);
 			path = PostModels;
 			sourceTree = "<group>";
@@ -83,6 +88,7 @@
 		A3C2D4CA2908293800C0AF5F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				4AA5E2632B6D9C7C00B89431 /* AddEditPostController.swift */,
 				A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */,
 				4AA5E2492B6AA8C100B89431 /* EditProfileController.swift */,
 				4AA5E21B2B695F3500B89431 /* UserProfileController.swift */,
@@ -215,6 +221,7 @@
 				A3C2D4CD2908297000C0AF5F /* User.swift in Sources */,
 				A3DFFA4C2901B8F400A28B8C /* ViewController.swift in Sources */,
 				A3DFFA482901B8F400A28B8C /* AppDelegate.swift in Sources */,
+				4AA5E2622B6D999300B89431 /* PostPost.swift in Sources */,
 				4AA5E2162B6812A100B89431 /* Post.swift in Sources */,
 				A3C2D4CF29082B1300C0AF5F /* AuthenticationController.swift in Sources */,
 				4AA5E24A2B6AA8C100B89431 /* EditProfileController.swift in Sources */,
@@ -225,6 +232,7 @@
 				4AA5E25B2B6D3A3800B89431 /* Success.swift in Sources */,
 				4AA5E21C2B695F3500B89431 /* UserProfileController.swift in Sources */,
 				4AA5E2182B6813CC00B89431 /* UserProfile.swift in Sources */,
+				4AA5E2642B6D9C7C00B89431 /* AddEditPostController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

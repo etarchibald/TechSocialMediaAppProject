@@ -52,11 +52,10 @@ class EditProfileViewController: UIViewController {
         }
     }
     
-    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
         guard let userName = userNameTextField.text, let bio = bioTextField.text, let techInterests = techInterestsTextField.text  else { return }
         postProfile = PostProfile(userName: userName, bio: bio, techInterests: techInterests)
         updateProfilePost()
         self.navigationController?.popViewController(animated: true)
     }
-    
 }
