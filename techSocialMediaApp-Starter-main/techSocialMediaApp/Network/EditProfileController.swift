@@ -13,12 +13,12 @@ class EditProfileController {
         case couldNotEdit
     }
     
-    func editProfilePost(secret: UUID, userName: String, bio: String, techInterests: String) async throws -> Bool {
+    func editProfilePost(secret: UUID, postProfile: PostProfile) async throws -> Success {
         
         let session = URLSession.shared
         var request = URLRequest(url: URL(string: "\(API.url)/updateProfile")!)
         
-        let credentials: [String: Any] = ["userSecret" : secret.uuidString, "profile" : ["userName" : userName, "bio" : bio, "techInterests" : techInterests]]
+        let credentials: [String: Any] = ["userSecret" : secret.uuidString, "profile" : postProfile.bodyParameters]
         
         request.httpBody = try JSONSerialization.data(withJSONObject: credentials, options: .prettyPrinted)
         request.httpMethod = "POST"
@@ -33,6 +33,6 @@ class EditProfileController {
         
         // Decode our response data to a usable User struct
         let decoder = JSONDecoder()
-        return try decoder.decode(Bool.self, from: data)
+        return try decoder.decode(Success.self, from: data)
     }
 }

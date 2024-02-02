@@ -14,15 +14,11 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     
     var secret: UUID?
-    var userName: String?
-    var bio: String?
-    var techInterests: String?
+    var postProfile: PostProfile?
     
-    required init?(coder: NSCoder, secret: UUID, userName: String, bio: String, techInterests: String) {
+    required init?(coder: NSCoder, secret: UUID, postProfile: PostProfile) {
         self.secret = secret
-        self.userName = userName
-        self.bio = bio
-        self.techInterests = techInterests
+        self.postProfile = postProfile
         super.init(coder: coder)
     }
     
@@ -36,18 +32,18 @@ class EditProfileViewController: UIViewController {
     }
     
     func updateUI() {
-        guard (userName != nil), (bio != nil), (techInterests != nil) else { return }
-        techInterestsTextField.text = techInterests
-        userNameTextField.text = userName
-        bioTextField.text = bio
+        guard let postProfile = postProfile else { return }
+        techInterestsTextField.text = postProfile.techInterests
+        userNameTextField.text = postProfile.userName
+        bioTextField.text = postProfile.bio
         
     }
     
     func updateProfilePost() {
-        if let secret = secret, let userName = userName, let bio = bio, let techInterests = techInterests {
+        if let secret = secret, let postProfile = postProfile {
             Task {
                 do {
-                    let response = try await EditProfileController().editProfilePost(secret: secret, userName: userName, bio: bio, techInterests: techInterests)
+                    let response = try await EditProfileController().editProfilePost(secret: secret, postProfile: postProfile)
                     print(response)
                 } catch {
                     print(error)
@@ -57,7 +53,8 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        guard ((userNameTextField.text?.isEmpty) != nil), ((bioTextField.text?.isEmpty) != nil), ((techInterestsTextField.text?.isEmpty) != nil) else { return }
+        guard let userName = userNameTextField.text, let bio = bioTextField.text, let techInterests = techInterestsTextField.text  else { return }
+        postProfile = PostProfile(userName: userName, bio: bio, techInterests: techInterests)
         updateProfilePost()
         self.navigationController?.popViewController(animated: true)
     }

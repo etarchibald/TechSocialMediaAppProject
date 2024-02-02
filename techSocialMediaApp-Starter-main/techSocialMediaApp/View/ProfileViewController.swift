@@ -15,7 +15,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     
-    var userProfile = UserProfile(firstName: "", lastName: "", userName: "", userUUID: UUID(), bio: "", techInterests: "", posts: [])
+    var userProfile = UserProfile(firstName: "", lastName: "", userName: "", userUUID: UUID(), bio: "", techInterests: "", posts: []) {
+        didSet {
+            print(userProfile)
+        }
+    }
     private var userProfileController = UserProfileController()
     
     override func viewDidLoad() {
@@ -54,7 +58,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBSegueAction func editProfile(_ coder: NSCoder, sender: Any?) -> EditProfileViewController? {
-        return EditProfileViewController(coder: coder, secret: User.current!.secret, userName: userProfile.userName, bio: userProfile.bio ?? "", techInterests: userProfile.techInterests ?? "")
+        return EditProfileViewController(coder: coder, secret: User.current!.secret, postProfile: PostProfile(userName: userProfile.userName, bio: userProfile.bio ?? "", techInterests: userProfile.techInterests ?? ""))
     }
 }
 
