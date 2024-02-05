@@ -85,10 +85,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let post = userProfile.posts[indexPath.row]
-            userProfile.posts.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            deletePost(postid: post.postid)
+            let ac = UIAlertController(title: "Delete", message: "Are you sure you want to delete your post?", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                let post = self.userProfile.posts[indexPath.row]
+                self.userProfile.posts.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                self.deletePost(postid: post.postid)
+            }))
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            present(ac, animated: true)
         }
     }
     
