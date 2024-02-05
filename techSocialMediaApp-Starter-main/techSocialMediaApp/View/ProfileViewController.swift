@@ -82,4 +82,26 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let post = userProfile.posts[indexPath.row]
+            userProfile.posts.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            deletePost(postid: post.postid)
+        }
+    }
+    
+    func deletePost(postid: Int) {
+        Task {
+            do {
+                let secretQueryItem = URLQueryItem(name: "userSecret", value: User.current?.secret.uuidString)
+                let postidQueryItem = URLQueryItem(name: "postid", value: String(postid))
+                
+                _ = try await AddEditPostController().deletePost(matching: [secretQueryItem, postidQueryItem])
+            } catch {
+                print(error)
+            }
+        }
+    }
 }

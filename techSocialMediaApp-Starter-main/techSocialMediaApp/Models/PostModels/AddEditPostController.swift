@@ -15,7 +15,8 @@ class AddEditPostController {
     
     func createPost(secret: UUID, post: PostPost) async throws -> Post {
         let session = URLSession.shared
-        var request = URLRequest(url: URL(string: "\(API.url)/createPost")!)
+        let url = URL(string: "/createPost", relativeTo: URL(string:API.url))
+        var request = URLRequest(url: url!)
         
         let credentials: [String: Any] = ["userSecret" : secret.uuidString, "post" : post.createPostParamaters]
         
@@ -33,5 +34,13 @@ class AddEditPostController {
         return try decoder.decode(Post.self, from: data)
     }
     
-    
+    func deletePost(matching queryItems: [URLQueryItem]) async throws {
+        var urlComponents = URLComponents(string: "\(API.url)/post")!
+        
+        urlComponents.queryItems = queryItems
+        
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "DELETE"
+        let (data, _) = try await URLSession.shared.data(for: request)
+    }
 }

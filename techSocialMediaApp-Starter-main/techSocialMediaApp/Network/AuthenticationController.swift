@@ -22,7 +22,8 @@ class AuthenticationController {
     func signIn(email: String, password: String) async throws -> Bool {
         // Initialize our session and request
         let session = URLSession.shared
-        var request = URLRequest(url: URL(string: "\(API.url)/signIn")!)
+        let url = URL(string: "/signIn", relativeTo: URL(string: API.url))
+        var request = URLRequest(url: url!)
         
         // Put the credentials in JSON format
         let credentials: [String: Any] = ["email": email, "password": password]

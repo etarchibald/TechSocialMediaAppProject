@@ -16,7 +16,8 @@ class EditProfileController {
     func editProfilePost(secret: UUID, postProfile: PostProfile) async throws -> Success {
         
         let session = URLSession.shared
-        var request = URLRequest(url: URL(string: "\(API.url)/updateProfile")!)
+        let url = URL(string: "/updateProfile", relativeTo: URL(string: API.url))
+        var request = URLRequest(url: url!)
         
         let credentials: [String: Any] = ["userSecret" : secret.uuidString, "profile" : postProfile.bodyParameters]
         
