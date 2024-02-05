@@ -55,10 +55,15 @@ class ProfileViewController: UIViewController {
         bioLabel.text = userProfile.bio
         fullNameLabel.text = "\(userProfile.firstName) \(userProfile.lastName)"
         userNameLabel.text = userProfile.userName
+        tableView.reloadData()
     }
     
     @IBSegueAction func editProfile(_ coder: NSCoder, sender: Any?) -> EditProfileViewController? {
         return EditProfileViewController(coder: coder, secret: User.current!.secret, postProfile: PostProfile(userName: userProfile.userName, bio: userProfile.bio ?? "", techInterests: userProfile.techInterests ?? ""))
+    }
+    
+    @IBSegueAction func createPost(_ coder: NSCoder, sender: Any?) -> AddEditPostViewController? {
+        return AddEditPostViewController(coder: coder, post: PostPost(title: "", body: ""))
     }
 }
 

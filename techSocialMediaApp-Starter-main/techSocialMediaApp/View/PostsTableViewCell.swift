@@ -16,7 +16,7 @@ class PostsTableViewCell: UITableViewCell {
     @IBOutlet weak var createdDateLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     
-    private var post = Post(postid: 0, title: "", body: "", authorUserName: "", authorUserId: "", likes: 0, userLiked: false, numComments: 0, createdDate: "")
+    private var post = Post(postid: 0, title: "", body: "", authorUserName: "", authorUserId: "", likes: 0, userLiked: false, numComments: 0, createdDate: "", comments: [])
     
     func updateUI(using post: Post) {
         self.post = post
