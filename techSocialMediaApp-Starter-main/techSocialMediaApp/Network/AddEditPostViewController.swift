@@ -13,6 +13,7 @@ class AddEditPostViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     
     var post: PostPost?
+    var addEditViewController = AddEditPostController()
     
     required init?(coder: NSCoder, post: PostPost) {
         self.post = post
@@ -38,7 +39,19 @@ class AddEditPostViewController: UIViewController {
         if let post = post {
             Task {
                 do {
-                    _ = try await AddEditPostController().createPost(secret: User.current!.secret, post: post)
+                    _ = try await addEditViewController.createPost(secret: User.current!.secret, post: post)
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func editPost() {
+        if let post = post {
+            Task {
+                do {
+                    _ = try await addEditViewController.editPost(secret: User.current!.secret, post: post)
                 } catch {
                     print(error)
                 }
@@ -48,8 +61,13 @@ class AddEditPostViewController: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         guard titleTextField.text != "", bodyTextView.text != "" else { return }
-        post = PostPost(title: titleTextField.text!, body: bodyTextView.text)
-        createPost()
+        if post?.postid != nil {
+            post = PostPost(postid: post?.postid, title: titleTextField.text!, body: bodyTextView.text!)
+            editPost()
+        } else {
+            post = PostPost(title: titleTextField.text!, body: bodyTextView.text)
+            createPost()
+        }
         self.navigationController?.popViewController(animated: true)
     }
 }
