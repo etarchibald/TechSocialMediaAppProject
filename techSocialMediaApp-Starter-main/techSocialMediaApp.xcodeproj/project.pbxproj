@@ -17,7 +17,7 @@
 		4AA5E25B2B6D3A3800B89431 /* Success.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E25A2B6D3A3800B89431 /* Success.swift */; };
 		4AA5E2602B6D46BC00B89431 /* PostProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E25F2B6D46BC00B89431 /* PostProfile.swift */; };
 		4AA5E2622B6D999300B89431 /* PostPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2612B6D999300B89431 /* PostPost.swift */; };
-		4AA5E2642B6D9C7C00B89431 /* AddEditPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2632B6D9C7C00B89431 /* AddEditPostController.swift */; };
+		4AA5E2642B6D9C7C00B89431 /* AddEditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2632B6D9C7C00B89431 /* AddEditPost.swift */; };
 		4AA5E2662B712C1800B89431 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2652B712C1800B89431 /* Comments.swift */; };
 		4AA5E2682B71314900B89431 /* AddEditPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2672B71314900B89431 /* AddEditPostViewController.swift */; };
 		4AA5E26A2B72906300B89431 /* AllPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2692B72906300B89431 /* AllPostsViewController.swift */; };
@@ -44,7 +44,7 @@
 		4AA5E25A2B6D3A3800B89431 /* Success.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Success.swift; path = techSocialMediaApp/Models/PostModels/Success.swift; sourceTree = SOURCE_ROOT; };
 		4AA5E25F2B6D46BC00B89431 /* PostProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProfile.swift; sourceTree = "<group>"; };
 		4AA5E2612B6D999300B89431 /* PostPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPost.swift; sourceTree = "<group>"; };
-		4AA5E2632B6D9C7C00B89431 /* AddEditPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddEditPostController.swift; path = techSocialMediaApp/Models/PostModels/AddEditPostController.swift; sourceTree = SOURCE_ROOT; };
+		4AA5E2632B6D9C7C00B89431 /* AddEditPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddEditPost.swift; path = techSocialMediaApp/Models/PostModels/AddEditPost.swift; sourceTree = SOURCE_ROOT; };
 		4AA5E2652B712C1800B89431 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		4AA5E2672B71314900B89431 /* AddEditPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddEditPostViewController.swift; path = techSocialMediaApp/Network/AddEditPostViewController.swift; sourceTree = SOURCE_ROOT; };
 		4AA5E2692B72906300B89431 /* AllPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AllPostsViewController.swift; path = techSocialMediaApp/AllPostsViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				4AA5E26B2B73D0C900B89431 /* APIController.swift */,
-				4AA5E2632B6D9C7C00B89431 /* AddEditPostController.swift */,
+				4AA5E2632B6D9C7C00B89431 /* AddEditPost.swift */,
 				A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */,
 				4AA5E2492B6AA8C100B89431 /* EditProfileController.swift */,
 				4AA5E21B2B695F3500B89431 /* UserProfileController.swift */,
@@ -248,7 +248,7 @@
 				4AA5E21C2B695F3500B89431 /* UserProfileController.swift in Sources */,
 				4AA5E2182B6813CC00B89431 /* UserProfile.swift in Sources */,
 				4AA5E2682B71314900B89431 /* AddEditPostViewController.swift in Sources */,
-				4AA5E2642B6D9C7C00B89431 /* AddEditPostController.swift in Sources */,
+				4AA5E2642B6D9C7C00B89431 /* AddEditPost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
