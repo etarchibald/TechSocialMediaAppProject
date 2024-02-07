@@ -21,6 +21,7 @@
 		4AA5E2662B712C1800B89431 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2652B712C1800B89431 /* Comments.swift */; };
 		4AA5E2682B71314900B89431 /* AddEditPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2672B71314900B89431 /* AddEditPostViewController.swift */; };
 		4AA5E26A2B72906300B89431 /* AllPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2692B72906300B89431 /* AllPostsViewController.swift */; };
+		4AA5E26C2B73D0C900B89431 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E26B2B73D0C900B89431 /* APIController.swift */; };
 		A3C2D4CD2908297000C0AF5F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C2D4CC2908297000C0AF5F /* User.swift */; };
 		A3C2D4CF29082B1300C0AF5F /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */; };
 		A3C2D4D129082BF900C0AF5F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C2D4D029082BF900C0AF5F /* API.swift */; };
@@ -47,6 +48,7 @@
 		4AA5E2652B712C1800B89431 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		4AA5E2672B71314900B89431 /* AddEditPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddEditPostViewController.swift; path = techSocialMediaApp/Network/AddEditPostViewController.swift; sourceTree = SOURCE_ROOT; };
 		4AA5E2692B72906300B89431 /* AllPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AllPostsViewController.swift; path = techSocialMediaApp/AllPostsViewController.swift; sourceTree = SOURCE_ROOT; };
+		4AA5E26B2B73D0C900B89431 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		A3C2D4CC2908297000C0AF5F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		A3C2D4D029082BF900C0AF5F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		A3C2D4CA2908293800C0AF5F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				4AA5E26B2B73D0C900B89431 /* APIController.swift */,
 				4AA5E2632B6D9C7C00B89431 /* AddEditPostController.swift */,
 				A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */,
 				4AA5E2492B6AA8C100B89431 /* EditProfileController.swift */,
@@ -239,6 +242,7 @@
 				4AA5E21E2B69635F00B89431 /* PostsTableViewCell.swift in Sources */,
 				4AA5E2662B712C1800B89431 /* Comments.swift in Sources */,
 				A3C2D4D129082BF900C0AF5F /* API.swift in Sources */,
+				4AA5E26C2B73D0C900B89431 /* APIController.swift in Sources */,
 				A3DFFA4A2901B8F400A28B8C /* SceneDelegate.swift in Sources */,
 				4AA5E25B2B6D3A3800B89431 /* Success.swift in Sources */,
 				4AA5E21C2B695F3500B89431 /* UserProfileController.swift in Sources */,

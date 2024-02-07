@@ -13,7 +13,6 @@ class AddEditPostViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     
     var post: PostPost?
-    var addEditViewController = AddEditPostController()
     
     required init?(coder: NSCoder, post: PostPost) {
         self.post = post
@@ -39,7 +38,8 @@ class AddEditPostViewController: UIViewController {
         if let post = post {
             Task {
                 do {
-                    _ = try await addEditViewController.createPost(secret: User.current!.secret, post: post)
+                    let createPostRequest = CreatePost(secret: User.current!.secret, post: post)
+                    _ = try await APIController.shared.sendRequest(createPostRequest)
                 } catch {
                     print(error)
                 }
@@ -51,7 +51,8 @@ class AddEditPostViewController: UIViewController {
         if let post = post {
             Task {
                 do {
-                    _ = try await addEditViewController.editPost(secret: User.current!.secret, post: post)
+                    let editPostRequest = EditPost(secret: User.current!.secret, post: post)
+                    _ = try await APIController.shared.sendRequest(editPostRequest)
                 } catch {
                     print(error)
                 }

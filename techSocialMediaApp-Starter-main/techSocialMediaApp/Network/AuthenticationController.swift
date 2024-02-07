@@ -11,8 +11,6 @@ class AuthenticationController {
     enum AuthError: Error, LocalizedError {
         case couldNotSignIn
     }
-    
-
     /**
      Will make a request to authenticate the users credentials. If successful the User.current object will hold the signed in user.
      

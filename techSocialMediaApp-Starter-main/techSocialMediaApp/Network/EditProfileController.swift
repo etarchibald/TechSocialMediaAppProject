@@ -7,33 +7,21 @@
 
 import Foundation
 
-class EditProfileController {
+struct EditProfilePost: APIRequest {
+    var secret: UUID
+    var postProfile: PostProfile
     
-    enum EditProfileError: Error, LocalizedError {
-        case couldNotEdit
-    }
-    
-    func editProfilePost(secret: UUID, postProfile: PostProfile) async throws -> Success {
-        
-        let session = URLSession.shared
+    var urlRequest: URLRequest {
         let url = URL(string: "/updateProfile", relativeTo: URL(string: API.url))
         var request = URLRequest(url: url!)
-        
-        let credentials: [String: Any] = ["userSecret" : secret.uuidString, "profile" : postProfile.bodyParameters]
-        
-        request.httpBody = try JSONSerialization.data(withJSONObject: credentials, options: .prettyPrinted)
+        let credentials: [String : Any] = ["userSecret" : secret.uuidString, "profile" : postProfile.bodyParameters]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: .prettyPrinted)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let (data, response) = try await session.data(for: request)
-        
-        // Ensure we had a good response (status 200)
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw EditProfileError.couldNotEdit
-        }
-        
-        // Decode our response data to a usable User struct
-        let decoder = JSONDecoder()
-        return try decoder.decode(Success.self, from: data)
+        return request
+    }
+    
+    func decodeData(_ data: Data) throws -> Success {
+       return try JSONDecoder().decode(Success.self, from: data)
     }
 }

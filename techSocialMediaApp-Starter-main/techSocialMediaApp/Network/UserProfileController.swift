@@ -7,15 +7,21 @@
 
 import Foundation
 
-class UserProfileController {
+
+struct fetchUserProfile: APIRequest {
+    var userUUID: UUID
+    var secret: UUID
     
-    func fetchUserProfile(matching queryItems: [URLQueryItem]) async throws -> UserProfile {
-        var urlComponents = URLComponents(string: "\(API.url)/userProfile")!
-        
-        urlComponents.queryItems = queryItems
-        
-        let (data, _) = try await URLSession.shared.data(from: urlComponents.url!)
-        
-        return try JSONDecoder().decode(UserProfile.self, from: data)
+    var urlRequest: URLRequest {
+        var components = URLComponents(string: "\(API.url)/userProfile")!
+        let userQueryItem = URLQueryItem(name: "userUUID", value: userUUID.uuidString)
+        let secretQueryItem = URLQueryItem(name: "userSecret", value: secret.uuidString)
+        components.queryItems = [userQueryItem, secretQueryItem]
+        return URLRequest(url: components.url!)
+    }
+    
+    func decodeData(_ data: Data) throws -> UserProfile {
+        let userProfile = try JSONDecoder().decode(UserProfile.self, from: data)
+        return userProfile
     }
 }

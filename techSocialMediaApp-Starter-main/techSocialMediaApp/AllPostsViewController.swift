@@ -11,8 +11,6 @@ class AllPostsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var addEditPostController = AddEditPostController()
-    
     var posts = [Post(postid: 0, title: "", body: "", authorUserName: "", authorUserId: "", likes: 0, userLiked: false, numComments: 0, createdDate: "")]
     var pageNumber = 0
     
@@ -26,9 +24,8 @@ class AllPostsViewController: UIViewController {
     func fetchPosts() {
         Task {
             do {
-                let secretQueryItem = URLQueryItem(name: "userSecret", value: User.current!.secret.uuidString)
-                let pageNumberQueryItem = URLQueryItem(name: "pageNumber", value: String(pageNumber))
-                posts = try await addEditPostController.fetchPosts(matching: [secretQueryItem, pageNumberQueryItem])
+                let postRequest = FetchPosts(secret: User.current!.secret, pageNumber: pageNumber)
+                posts = try await APIController.shared.sendRequest(postRequest)
                 tableView.reloadData()
             } catch {
                 print(error)

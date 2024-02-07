@@ -7,72 +7,78 @@
 
 import Foundation
 
-class AddEditPostController {
+struct CreatePost: APIRequest {
+    var secret: UUID
+    var post: PostPost
     
-    enum CreatePostError: Error, LocalizedError {
-        case couldNotCreatePost
-        case couldNotEditPost
-    }
-    
-    func createPost(secret: UUID, post: PostPost) async throws -> Post {
-        let session = URLSession.shared
+    var urlRequest: URLRequest {
         let url = URL(string: "/createPost", relativeTo: URL(string: API.url))
         var request = URLRequest(url: url!)
-        
         let credentials: [String: Any] = ["userSecret" : secret.uuidString, "post" : post.createPostParamaters]
-        
-        request.httpBody = try JSONSerialization.data(withJSONObject: credentials, options: .prettyPrinted)
+        request.httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: .prettyPrinted)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let (data, response) = try await session.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw CreatePostError.couldNotCreatePost
-        }
-        
-        let decoder = JSONDecoder()
-        return try decoder.decode(Post.self, from: data)
+        return request
     }
     
-    func editPost(secret: UUID, post: PostPost) async throws -> Success {
-        let session = URLSession.shared
+    func decodeData(_ data: Data) throws -> Post {
+        return try JSONDecoder().decode(Post.self, from: data)
+    }
+}
+
+struct EditPost: APIRequest {
+    var secret: UUID
+    var post: PostPost
+    
+    var urlRequest: URLRequest {
         let url = URL(string: "/editPost", relativeTo: URL(string: API.url))
         var request = URLRequest(url: url!)
         
         let credentials: [String: Any] = ["userSecret" : secret.uuidString, "post" : post.editPostParameters]
         
-        request.httpBody = try JSONSerialization.data(withJSONObject: credentials, options: .prettyPrinted)
+        request.httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: .prettyPrinted)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let (data, response) = try await session.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw CreatePostError.couldNotEditPost
-        }
-        
-        let decoder = JSONDecoder()
-        return try decoder.decode(Success.self, from: data)
+        return request
     }
     
-    func deletePost(matching queryItems: [URLQueryItem]) async throws {
+    func decodeData(_ data: Data) throws -> Success {
+        return try JSONDecoder().decode(Success.self, from: data)
+    }
+}
+
+struct DeletePost: APIRequest {
+    var secret: UUID
+    var postid: Int
+    
+    var urlRequest: URLRequest {
         var urlComponents = URLComponents(string: "\(API.url)/post")!
-        
-        urlComponents.queryItems = queryItems
-        
+        let secretQueryItem = URLQueryItem(name: "userSecret", value: secret.uuidString)
+        let postidQueryItem = URLQueryItem(name: "postid", value: String(postid))
+        urlComponents.queryItems = [secretQueryItem, postidQueryItem]
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = "DELETE"
-        let (_, _) = try await URLSession.shared.data(for: request)
+        return request
     }
     
-    func fetchPosts(matching queryItems: [URLQueryItem]) async throws -> [Post] {
+    func decodeData(_ data: Data) throws -> Success {
+        return try JSONDecoder().decode(Success.self, from: data)
+    }
+}
+
+struct FetchPosts: APIRequest {
+    var secret: UUID
+    var pageNumber: Int
+    
+    var urlRequest: URLRequest {
         var urlComponents = URLComponents(string: "\(API.url)/posts")!
-        
-        urlComponents.queryItems = queryItems
-        
-        let (data, _) = try await URLSession.shared.data(from: urlComponents.url!)
-        
+        let secretQueryItem = URLQueryItem(name: "userSecret", value: secret.uuidString)
+        let pageNumberQueryItem = URLQueryItem(name: "pageNumber", value: String(pageNumber))
+        urlComponents.queryItems = [secretQueryItem, pageNumberQueryItem]
+        return URLRequest(url: urlComponents.url!)
+    }
+    
+    func decodeData(_ data: Data) throws -> [Post] {
         return try JSONDecoder().decode([Post].self, from: data)
     }
 }

@@ -15,12 +15,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     
-    var userProfile = UserProfile(firstName: "", lastName: "", userName: "", userUUID: UUID(), bio: "", techInterests: "", posts: []) {
-        didSet {
-            print(userProfile)
-        }
-    }
-    private var userProfileController = UserProfileController()
+    var userProfile = UserProfile(firstName: "", lastName: "", userName: "", userUUID: UUID(), bio: "", techInterests: "", posts: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +32,10 @@ class ProfileViewController: UIViewController {
         
         self.tableView.reloadData()
         
-        let userQueryItem = URLQueryItem(name: "userUUID", value: User.current?.userUUID.uuidString)
-        let secretQueryItem = URLQueryItem(name: "userSecret", value: User.current?.secret.uuidString)
-        
         Task {
             do {
-                userProfile = try await userProfileController.fetchUserProfile(matching: [userQueryItem, secretQueryItem])
+                let profileToSearch = fetchUserProfile(userUUID: User.current!.userUUID, secret: User.current!.secret)
+                userProfile = try await APIController.shared.sendRequest(profileToSearch)
                 updateUI()
             } catch {
                 print(error)
@@ -109,10 +102,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func deletePost(postid: Int) {
         Task {
             do {
-                let secretQueryItem = URLQueryItem(name: "userSecret", value: User.current?.secret.uuidString)
-                let postidQueryItem = URLQueryItem(name: "postid", value: String(postid))
-                
-                _ = try await AddEditPostController().deletePost(matching: [secretQueryItem, postidQueryItem])
+                let deletePostRequest = DeletePost(secret: User.current!.secret, postid: postid)
+                _ = try await APIController.shared.sendRequest(deletePostRequest)
             } catch {
                 print(error)
             }

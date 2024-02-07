@@ -43,7 +43,8 @@ class EditProfileViewController: UIViewController {
         if let secret = secret, let postProfile = postProfile {
             Task {
                 do {
-                    _ = try await EditProfileController().editProfilePost(secret: secret, postProfile: postProfile)
+                    let editProfileRequest = EditProfilePost(secret: secret, postProfile: postProfile)
+                    _ = try await APIController.shared.sendRequest(editProfileRequest)
                 } catch {
                     print(error)
                 }
