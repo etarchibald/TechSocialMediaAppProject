@@ -17,7 +17,7 @@ struct Post: Codable {
     var userLiked: Bool
     var numComments: Int
     var createdDate: String
-    var comments: [Comments]?
+    var comments: [Comment]?
     
     enum CodingKeys: CodingKey {
         case postid

@@ -12,6 +12,7 @@ class AllPostsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var posts = [Post(postid: 0, title: "", body: "", authorUserName: "", authorUserId: "", likes: 0, userLiked: false, numComments: 0, createdDate: "")]
+    var postid = 0
     var pageNumber = 0
     
     override func viewDidLoad() {
@@ -32,6 +33,11 @@ class AllPostsViewController: UIViewController {
             }
         }
     }
+    
+    @IBSegueAction func toComments(_ coder: NSCoder, sender: Any?) -> CommetsViewController? {
+        return CommetsViewController(coder: coder, postid: postid)
+    }
+    
 }
 
 extension AllPostsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -42,10 +48,18 @@ extension AllPostsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! PostsTableViewCell
         
+        cell.delegate = self
+        
         let post = posts[indexPath.row]
         
         cell.updateUI(using: post)
         
         return cell
+    }
+}
+
+extension AllPostsViewController: PostDelegate {
+    func postButtonPressed(postid: Int) {
+        self.postid = postid
     }
 }

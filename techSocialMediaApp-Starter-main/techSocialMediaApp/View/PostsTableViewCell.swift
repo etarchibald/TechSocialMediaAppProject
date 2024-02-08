@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PostDelegate {
+    func postButtonPressed(postid: Int)
+}
+
 class PostsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var commentCounterLabel: UILabel!
@@ -18,6 +22,8 @@ class PostsTableViewCell: UITableViewCell {
     
     private var post = Post(postid: 0, title: "", body: "", authorUserName: "", authorUserId: "", likes: 0, userLiked: false, numComments: 0, createdDate: "", comments: [])
     
+    var delegate: PostDelegate?
+    
     func updateUI(using post: Post) {
         self.post = post
         titleLabel.text = post.title
@@ -28,5 +34,7 @@ class PostsTableViewCell: UITableViewCell {
         commentCounterLabel.text = String(post.numComments)
     }
     
-    
+    @IBAction func commentButtonTapped(_ sender: UIButton) {
+        delegate?.postButtonPressed(postid: post.postid)
+    }
 }

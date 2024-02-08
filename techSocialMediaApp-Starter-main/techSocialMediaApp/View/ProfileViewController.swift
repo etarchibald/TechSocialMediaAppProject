@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     
     var userProfile = UserProfile(firstName: "", lastName: "", userName: "", userUUID: UUID(), bio: "", techInterests: "", posts: [])
+    private var postid = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +68,9 @@ class ProfileViewController: UIViewController {
         return AddEditPostViewController(coder: coder, post: PostPost(postid: post.postid, title: post.title, body: post.body))
     }
     
+    @IBSegueAction func toComments(_ coder: NSCoder, sender: Any?) -> CommetsViewController? {
+        return CommetsViewController(coder: coder, postid: postid)
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -77,6 +81,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! PostsTableViewCell
+        
+        cell.delegate = self
         
         let post = userProfile.posts[indexPath.row]
         
@@ -108,5 +114,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 print(error)
             }
         }
+    }
+}
+
+
+extension ProfileViewController: PostDelegate {
+    func postButtonPressed(postid: Int) {
+        self.postid = postid
     }
 }
