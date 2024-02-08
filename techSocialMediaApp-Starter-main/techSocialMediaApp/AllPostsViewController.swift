@@ -22,6 +22,10 @@ class AllPostsViewController: UIViewController {
         fetchPosts()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        fetchPosts()
+    }
+    
     func fetchPosts() {
         Task {
             do {
@@ -37,7 +41,6 @@ class AllPostsViewController: UIViewController {
     @IBSegueAction func toComments(_ coder: NSCoder, sender: Any?) -> CommetsViewController? {
         return CommetsViewController(coder: coder, postid: postid)
     }
-    
 }
 
 extension AllPostsViewController: UITableViewDelegate, UITableViewDataSource {

@@ -45,8 +45,24 @@ class CommetsViewController: UIViewController {
         }
     }
     
+    func createComment() {
+        let commentBody = commentTextField.text!
+        Task {
+            do {
+                let createCommetRequest = CreateCommet(secret: User.current!.secret, commentBody: commentBody, postid: postid)
+                let newComment = try await APIController.shared.sendRequest(createCommetRequest)
+                comments.append(newComment)
+                tableView.reloadData()
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
     @IBAction func addCommentPressed(_ sender: UIButton) {
-        
+        guard let commentBody = commentTextField.text, commentBody != "" else { return }
+        createComment()
+        commentTextField.text = ""
     }
 }
 

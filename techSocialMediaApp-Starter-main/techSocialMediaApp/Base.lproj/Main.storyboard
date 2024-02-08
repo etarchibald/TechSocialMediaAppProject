@@ -466,7 +466,7 @@
             </objects>
             <point key="canvasLocation" x="3287.6923076923076" y="682.46445497630327"/>
         </scene>
-        <!--All Posts View Controller-->
+        <!--Posts!-->
         <scene sceneID="HFC-Gc-o3V">
             <objects>
                 <viewController id="YFD-GV-jMO" customClass="AllPostsViewController" customModule="techSocialMediaApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -598,7 +598,7 @@
                             <constraint firstItem="bEM-0V-S5w" firstAttribute="bottom" secondItem="wW5-Ll-NV7" secondAttribute="bottom" id="rca-GJ-1Zk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="o6D-6A-Zsj"/>
+                    <navigationItem key="navigationItem" title="Posts!" id="o6D-6A-Zsj"/>
                     <connections>
                         <outlet property="tableView" destination="bEM-0V-S5w" id="Flf-EJ-WVK"/>
                     </connections>
@@ -873,8 +873,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W0W-xW-xNV" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Posts" image="list.bullet.clipboard.fill" catalog="system" id="wKK-h0-GyD"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OaG-2j-JnC">
-                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="OaG-2j-JnC">
+                        <rect key="frame" x="0.0" y="47" width="390" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

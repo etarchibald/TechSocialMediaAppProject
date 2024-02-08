@@ -38,6 +38,7 @@ class ProfileViewController: UIViewController {
                 let profileToSearch = fetchUserProfile(userUUID: User.current!.userUUID, secret: User.current!.secret)
                 userProfile = try await APIController.shared.sendRequest(profileToSearch)
                 updateUI()
+                tableView.reloadData()
             } catch {
                 print(error)
             }
