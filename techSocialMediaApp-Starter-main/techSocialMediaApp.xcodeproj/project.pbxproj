@@ -25,6 +25,7 @@
 		4AA5E26E2B73E8B700B89431 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E26D2B73E8B700B89431 /* CommentTableViewCell.swift */; };
 		4AA5E2702B73ECB800B89431 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E26F2B73ECB800B89431 /* CommentController.swift */; };
 		4AA5E2722B73EEF100B89431 /* CommetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2712B73EEF100B89431 /* CommetsViewController.swift */; };
+		4AA5E2742B76709C00B89431 /* LikeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5E2732B76709C00B89431 /* LikeController.swift */; };
 		A3C2D4CD2908297000C0AF5F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C2D4CC2908297000C0AF5F /* User.swift */; };
 		A3C2D4CF29082B1300C0AF5F /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */; };
 		A3C2D4D129082BF900C0AF5F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C2D4D029082BF900C0AF5F /* API.swift */; };
@@ -55,6 +56,7 @@
 		4AA5E26D2B73E8B700B89431 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommentTableViewCell.swift; path = techSocialMediaApp/CommentTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		4AA5E26F2B73ECB800B89431 /* CommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommentController.swift; path = techSocialMediaApp/View/CommentController.swift; sourceTree = SOURCE_ROOT; };
 		4AA5E2712B73EEF100B89431 /* CommetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommetsViewController.swift; path = techSocialMediaApp/Network/CommetsViewController.swift; sourceTree = SOURCE_ROOT; };
+		4AA5E2732B76709C00B89431 /* LikeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeController.swift; sourceTree = "<group>"; };
 		A3C2D4CC2908297000C0AF5F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		A3C2D4D029082BF900C0AF5F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				4AA5E26B2B73D0C900B89431 /* APIController.swift */,
 				4AA5E2632B6D9C7C00B89431 /* AddEditPost.swift */,
 				4AA5E26F2B73ECB800B89431 /* CommentController.swift */,
+				4AA5E2732B76709C00B89431 /* LikeController.swift */,
 				A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */,
 				4AA5E2492B6AA8C100B89431 /* EditProfileController.swift */,
 				4AA5E21B2B695F3500B89431 /* UserProfileController.swift */,
@@ -246,6 +249,7 @@
 				4AA5E2622B6D999300B89431 /* PostPost.swift in Sources */,
 				4AA5E2162B6812A100B89431 /* Post.swift in Sources */,
 				A3C2D4CF29082B1300C0AF5F /* AuthenticationController.swift in Sources */,
+				4AA5E2742B76709C00B89431 /* LikeController.swift in Sources */,
 				4AA5E24A2B6AA8C100B89431 /* EditProfileController.swift in Sources */,
 				4AA5E2142B68114000B89431 /* ProfileViewController.swift in Sources */,
 				4AA5E2702B73ECB800B89431 /* CommentController.swift in Sources */,
