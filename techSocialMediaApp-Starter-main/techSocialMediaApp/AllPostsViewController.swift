@@ -19,14 +19,14 @@ class AllPostsViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        fetchPosts()
+        fetchPosts(pageNumber: pageNumber)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        fetchPosts()
+        fetchPosts(pageNumber: pageNumber)
     }
     
-    func fetchPosts() {
+    func fetchPosts(pageNumber: Int) {
         Task {
             do {
                 let postRequest = FetchPosts(secret: User.current!.secret, pageNumber: pageNumber)
