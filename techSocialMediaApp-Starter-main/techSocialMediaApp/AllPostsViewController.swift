@@ -15,6 +15,8 @@ class AllPostsViewController: UIViewController {
     var postid = 0
     var pageNumber = 0
     
+//    var collectionViewDataSource: UICollectionViewDiffableDataSource<String, Post>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
@@ -69,6 +71,20 @@ extension AllPostsViewController: UICollectionViewDelegate, UICollectionViewData
         
         return cell
     }
+    
+//    func configureCollectionViewDataSource(_ collectionView: UICollectionView) {
+//        collectionViewDataSource = UICollectionViewDiffableDataSource<String, Post>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, post) -> UICollectionViewCell? in
+//            
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "post", for: indexPath) as! PostsCollectionViewCell
+//            
+//            cell.delegate = self
+//            
+//            cell.updateUI(using: post)
+//            cell.layer.cornerRadius = 20
+//            
+//            return cell
+//        })
+//    }
 }
 
 extension AllPostsViewController: PostDelegate {

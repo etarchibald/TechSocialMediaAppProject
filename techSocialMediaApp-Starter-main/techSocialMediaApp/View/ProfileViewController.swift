@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var techInterestsLabel: UILabel!
     @IBOutlet weak var bioLabel: UILabel!
     @IBOutlet weak var fullNameLabel: UILabel!
@@ -20,8 +20,16 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5)), repeatingSubitem: item, count: 1)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(section: section)
+        
         getUserProfile()
     }
     
@@ -31,14 +39,14 @@ class ProfileViewController: UIViewController {
     
     func getUserProfile() {
         
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
         
         Task {
             do {
                 let profileToSearch = fetchUserProfile(userUUID: User.current!.userUUID, secret: User.current!.secret)
                 userProfile = try await APIController.shared.sendRequest(profileToSearch)
                 updateUI()
-                tableView.reloadData()
+                collectionView.reloadData()
             } catch {
                 print(error)
             }
@@ -50,7 +58,7 @@ class ProfileViewController: UIViewController {
         bioLabel.text = userProfile.bio
         fullNameLabel.text = "\(userProfile.firstName) \(userProfile.lastName)"
         userNameLabel.text = userProfile.userName
-        tableView.reloadData()
+        collectionView.reloadData()
     }
     
     @IBSegueAction func editProfile(_ coder: NSCoder, sender: Any?) -> EditProfileViewController? {
@@ -61,8 +69,8 @@ class ProfileViewController: UIViewController {
         return AddEditPostViewController(coder: coder, post: PostPost(title: "", body: ""))
     }
     
-    @IBSegueAction func editPost(_ coder: NSCoder, sender: Any?) -> AddEditPostViewController? {
-        guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else { return nil }
+    @IBSegueAction func toEdit(_ coder: NSCoder, sender: Any?) -> AddEditPostViewController? {
+        guard let cell = sender as? UICollectionViewCell, let indexPath = collectionView.indexPath(for: cell) else { return nil }
         
         let post = userProfile.posts[indexPath.row]
         
@@ -72,6 +80,30 @@ class ProfileViewController: UIViewController {
     @IBSegueAction func toComments(_ coder: NSCoder, sender: Any?) -> CommetsViewController? {
         return CommetsViewController(coder: coder, postid: postid)
     }
+}
+
+extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        userProfile.posts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "post", for: indexPath) as! PostsCollectionViewCell
+        
+        cell.delegate = self
+        
+        let post = userProfile.posts[indexPath.row]
+        
+        cell.updateUI(using: post)
+        cell.layer.cornerRadius = 20 
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {

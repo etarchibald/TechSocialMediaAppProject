@@ -78,6 +78,8 @@ extension CommetsViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.updateUI(using: comment)
         
+        cell.layer.cornerRadius = 20 
+        
         return cell
     }
 }

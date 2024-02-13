@@ -9,6 +9,8 @@ import UIKit
 
 class AddEditPostViewController: UIViewController {
 
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var bodyTextView: UITextView!
     @IBOutlet weak var titleTextField: UITextField!
     
@@ -26,6 +28,8 @@ class AddEditPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        saveButton.layer.cornerRadius = 20
+        deleteButton.layer.cornerRadius = 20
     }
     
     func updateUI() {
@@ -60,6 +64,17 @@ class AddEditPostViewController: UIViewController {
         }
     }
     
+    func deletePost(postid: Int) {
+        Task {
+            do {
+                let deletePostRequest = DeletePost(secret: User.current!.secret, postid: postid)
+                _ = try await APIController.shared.sendRequest(deletePostRequest)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         guard titleTextField.text != "", bodyTextView.text != "" else { return }
         if post?.postid != nil {
@@ -71,4 +86,16 @@ class AddEditPostViewController: UIViewController {
         }
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        guard titleTextField.text != "", bodyTextView.text != "" else { return }
+        let ac = UIAlertController(title: "Delete", message: "Are you sure you want to delete your post?", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.deletePost(postid: (self.post?.postid)!)
+            self.navigationController?.popViewController(animated: true)
+        }))
+        present(ac, animated: true)
+    }
+    
 }
