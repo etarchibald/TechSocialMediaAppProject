@@ -8,7 +8,9 @@
 import UIKit
 
 protocol PostDelegate {
-    func postButtonPressed(postid: Int)
+    func commentButtonPressed(postid: Int)
+    
+    func userNameButtonPressed(authorUserId: String)
 }
 
 class PostsCollectionViewCell: UICollectionViewCell {
@@ -26,8 +28,6 @@ class PostsCollectionViewCell: UICollectionViewCell {
     var delegate: PostDelegate?
     
     override func layoutSubviews() {
-        
-//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0))
         super.layoutSubviews()
     }
     
@@ -55,11 +55,15 @@ class PostsCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func commentButtonTapped(_ sender: UIButton) {
-        delegate?.postButtonPressed(postid: post.postid)
+        delegate?.commentButtonPressed(postid: post.postid)
     }
     
     @IBAction func likeButtonTapped(_ sender: Any) {
         updateLikes()
+    }
+    
+    @IBAction func userNameButtonTapped(_ sender: Any) {
+        delegate?.userNameButtonPressed(authorUserId: post.authorUserId)
     }
     
 }

@@ -14,17 +14,8 @@ class CommetsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var comments = [Comment(commentId: 0, body: "", userName: "", userId: "", createdDate: "")]
-    var postid: Int
+    var postid: Int?
     var pageNumber = 0
-    
-    required init?(coder: NSCoder, postid: Int) {
-        self.postid = postid
-        super.init(coder: coder)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +24,16 @@ class CommetsViewController: UIViewController {
         fetchComments()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let toOtherProfile = segue.destination as? OtherProfileViewController, let userId = sender as? String {
+            toOtherProfile.userId = userId
+        }
+    }
+    
     func fetchComments() {
         Task {
             do {
-                let fetchCommentsRequest = FetchComments(secret: User.current!.secret, postid: postid, pageNumber: pageNumber)
+                let fetchCommentsRequest = FetchComments(secret: User.current!.secret, postid: postid!, pageNumber: pageNumber)
                 comments = try await APIController.shared.sendRequest(fetchCommentsRequest)
                 tableView.reloadData()
             } catch {
@@ -49,7 +46,7 @@ class CommetsViewController: UIViewController {
         let commentBody = commentTextField.text!
         Task {
             do {
-                let createCommetRequest = CreateCommet(secret: User.current!.secret, commentBody: commentBody, postid: postid)
+                let createCommetRequest = CreateCommet(secret: User.current!.secret, commentBody: commentBody, postid: postid!)
                 let newComment = try await APIController.shared.sendRequest(createCommetRequest)
                 comments.append(newComment)
                 tableView.reloadData()
@@ -78,8 +75,19 @@ extension CommetsViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.updateUI(using: comment)
         
-        cell.layer.cornerRadius = 20 
+        cell.delegate = self
+        
+        cell.layer.cornerRadius = 20
         
         return cell
+    }
+}
+
+extension CommetsViewController: PostDelegate {
+    func commentButtonPressed(postid: Int) {
+    }
+    
+    func userNameButtonPressed(authorUserId: String) {
+        performSegue(withIdentifier: "toProfile", sender: authorUserId)
     }
 }

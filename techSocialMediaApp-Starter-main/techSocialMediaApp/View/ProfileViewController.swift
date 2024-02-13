@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet weak var editProfileButton: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var techInterestsLabel: UILabel!
     @IBOutlet weak var bioLabel: UILabel!
@@ -16,7 +17,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     
     var userProfile = UserProfile(firstName: "", lastName: "", userName: "", userUUID: UUID(), bio: "", techInterests: "", posts: [])
-    private var postid = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,24 +61,31 @@ class ProfileViewController: UIViewController {
         collectionView.reloadData()
     }
     
-    @IBSegueAction func editProfile(_ coder: NSCoder, sender: Any?) -> EditProfileViewController? {
-        return EditProfileViewController(coder: coder, secret: User.current!.secret, postProfile: PostProfile(userName: userProfile.userName, bio: userProfile.bio ?? "", techInterests: userProfile.techInterests ?? ""))
-    }
-    
-    @IBSegueAction func createPost(_ coder: NSCoder, sender: Any?) -> AddEditPostViewController? {
-        return AddEditPostViewController(coder: coder, post: PostPost(title: "", body: ""))
-    }
-    
-    @IBSegueAction func toEdit(_ coder: NSCoder, sender: Any?) -> AddEditPostViewController? {
-        guard let cell = sender as? UICollectionViewCell, let indexPath = collectionView.indexPath(for: cell) else { return nil }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let toComments = segue.destination as? CommetsViewController, let postid = sender as? Int {
+            toComments.postid = postid
+        }
         
-        let post = userProfile.posts[indexPath.row]
+        if let editProfile = segue.destination as? EditProfileViewController, let postProfile = sender as? PostProfile {
+            editProfile.postProfile = postProfile
+            editProfile.secret = User.current!.secret
+        }
         
-        return AddEditPostViewController(coder: coder, post: PostPost(postid: post.postid, title: post.title, body: post.body))
+        if let createPost = segue.destination as? AddEditPostViewController, let postPost = sender as? PostPost {
+            createPost.post = postPost
+        }
+        
+        if let editPost = segue.destination as? AddEditPostViewController, let postPost = sender as? PostPost {
+            editPost.post = postPost
+        }
     }
     
-    @IBSegueAction func toComments(_ coder: NSCoder, sender: Any?) -> CommetsViewController? {
-        return CommetsViewController(coder: coder, postid: postid)
+    @IBAction func editProfileButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "toEditProfile", sender: PostProfile(userName: userProfile.userName, bio: userProfile.bio ?? "", techInterests: userProfile.techInterests ?? ""))
+    }
+    
+    @IBAction func createPostButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "createPost", sender: PostPost(title: "", body: ""))
     }
 }
 
@@ -100,59 +107,18 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-}
-
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userProfile.posts.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! PostsTableViewCell
-        
-        cell.delegate = self
-        
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let post = userProfile.posts[indexPath.row]
-        
-        cell.updateUI(using: post)
-        
-        return cell
+        performSegue(withIdentifier: "editPost", sender: PostPost(postid: post.postid, title: post.title, body: post.body))
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let ac = UIAlertController(title: "Delete", message: "Are you sure you want to delete your post?", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-                let post = self.userProfile.posts[indexPath.row]
-                self.userProfile.posts.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                self.deletePost(postid: post.postid)
-            }))
-            present(ac, animated: true)
-        }
-    }
-    
-    func deletePost(postid: Int) {
-        Task {
-            do {
-                let deletePostRequest = DeletePost(secret: User.current!.secret, postid: postid)
-                _ = try await APIController.shared.sendRequest(deletePostRequest)
-            } catch {
-                print(error)
-            }
-        }
-    }
 }
-
 
 extension ProfileViewController: PostDelegate {
-    func postButtonPressed(postid: Int) {
-        self.postid = postid
+    func commentButtonPressed(postid: Int) {
+        performSegue(withIdentifier: "toComment", sender: postid)
+    }
+    
+    func userNameButtonPressed(authorUserId: String) {
     }
 }

@@ -12,10 +12,7 @@ class AllPostsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var posts = [Post(postid: 0, title: "", body: "", authorUserName: "", authorUserId: "", likes: 0, userLiked: false, numComments: 0, createdDate: "")]
-    var postid = 0
     var pageNumber = 0
-    
-//    var collectionViewDataSource: UICollectionViewDiffableDataSource<String, Post>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +33,16 @@ class AllPostsViewController: UIViewController {
         fetchPosts(pageNumber: pageNumber)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let toOtherProfile = segue.destination as? OtherProfileViewController, let userId = sender as? String {
+            toOtherProfile.userId = userId
+        }
+        
+        if let toComments = segue.destination as? CommetsViewController, let postid = sender as? Int {
+            toComments.postid = postid
+        }
+    }
+    
     func fetchPosts(pageNumber: Int) {
         Task {
             do {
@@ -46,10 +53,6 @@ class AllPostsViewController: UIViewController {
                 print(error)
             }
         }
-    }
-    
-    @IBSegueAction func toComments(_ coder: NSCoder, sender: Any?) -> CommetsViewController? {
-        return CommetsViewController(coder: coder, postid: postid)
     }
 }
 
@@ -71,24 +74,14 @@ extension AllPostsViewController: UICollectionViewDelegate, UICollectionViewData
         
         return cell
     }
-    
-//    func configureCollectionViewDataSource(_ collectionView: UICollectionView) {
-//        collectionViewDataSource = UICollectionViewDiffableDataSource<String, Post>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, post) -> UICollectionViewCell? in
-//            
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "post", for: indexPath) as! PostsCollectionViewCell
-//            
-//            cell.delegate = self
-//            
-//            cell.updateUI(using: post)
-//            cell.layer.cornerRadius = 20
-//            
-//            return cell
-//        })
-//    }
 }
 
 extension AllPostsViewController: PostDelegate {
-    func postButtonPressed(postid: Int) {
-        self.postid = postid
+    func userNameButtonPressed(authorUserId: String) {
+        performSegue(withIdentifier: "toOtherProfile", sender: authorUserId)
+    }
+    
+    func commentButtonPressed(postid: Int) {
+        performSegue(withIdentifier: "toComments", sender: postid)
     }
 }

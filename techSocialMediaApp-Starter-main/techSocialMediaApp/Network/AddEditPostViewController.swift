@@ -16,15 +16,6 @@ class AddEditPostViewController: UIViewController {
     
     var post: PostPost?
     
-    required init?(coder: NSCoder, post: PostPost) {
-        self.post = post
-        super.init(coder: coder)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
