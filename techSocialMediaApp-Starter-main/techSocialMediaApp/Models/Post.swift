@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post: Codable, Hashable {
+struct Post: Codable {
     var postid: Int
     var title: String
     var body: String
@@ -30,9 +30,5 @@ struct Post: Codable, Hashable {
         case numComments
         case createdDate
         case comments
-    }
-    
-    static func == (lhs: Post, rhs: Post) -> Bool {
-        return lhs.postid < rhs.postid
     }
 }

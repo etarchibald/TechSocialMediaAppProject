@@ -15,6 +15,7 @@ class AddEditPostViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     
     var post: PostPost?
+    var secret: UUID?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +31,10 @@ class AddEditPostViewController: UIViewController {
     }
     
     func createPost() {
-        if let post = post {
+        if let post = post, let secret = secret {
             Task {
                 do {
-                    let createPostRequest = CreatePost(secret: User.current!.secret, post: post)
+                    let createPostRequest = CreatePost(secret: secret, post: post)
                     _ = try await APIController.shared.sendRequest(createPostRequest)
                 } catch {
                     print(error)
@@ -43,10 +44,10 @@ class AddEditPostViewController: UIViewController {
     }
     
     func editPost() {
-        if let post = post {
+        if let post = post, let secret = secret {
             Task {
                 do {
-                    let editPostRequest = EditPost(secret: User.current!.secret, post: post)
+                    let editPostRequest = EditPost(secret: secret, post: post)
                     _ = try await APIController.shared.sendRequest(editPostRequest)
                 } catch {
                     print(error)
@@ -56,12 +57,14 @@ class AddEditPostViewController: UIViewController {
     }
     
     func deletePost(postid: Int) {
-        Task {
-            do {
-                let deletePostRequest = DeletePost(secret: User.current!.secret, postid: postid)
-                _ = try await APIController.shared.sendRequest(deletePostRequest)
-            } catch {
-                print(error)
+        if let secret = secret {
+            Task {
+                do {
+                    let deletePostRequest = DeletePost(secret: secret, postid: postid)
+                    _ = try await APIController.shared.sendRequest(deletePostRequest)
+                } catch {
+                    print(error)
+                }
             }
         }
     }

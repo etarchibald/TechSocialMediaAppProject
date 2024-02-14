@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     
     var userProfile = UserProfile(firstName: "", lastName: "", userName: "", userUUID: UUID(), bio: "", techInterests: "", posts: [])
+    let secret = User.current?.secret
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,12 +72,16 @@ class ProfileViewController: UIViewController {
             editProfile.secret = User.current!.secret
         }
         
-        if let createPost = segue.destination as? AddEditPostViewController, let postPost = sender as? PostPost {
+        if let createPost = segue.destination as? AddEditPostViewController, let postPost = sender as? PostPost, let secret = secret {
             createPost.post = postPost
+            createPost.secret = secret
+            createPost.navigationItem.title = "Create your post!"
         }
         
-        if let editPost = segue.destination as? AddEditPostViewController, let postPost = sender as? PostPost {
+        if let editPost = segue.destination as? AddEditPostViewController, let postPost = sender as? PostPost, let secret = secret {
             editPost.post = postPost
+            editPost.secret = secret
+            editPost.navigationItem.title = "Edit your post!"
         }
     }
     

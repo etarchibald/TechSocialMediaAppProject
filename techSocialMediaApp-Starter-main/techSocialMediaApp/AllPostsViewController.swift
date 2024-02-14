@@ -11,8 +11,9 @@ class AllPostsViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var posts = [Post(postid: 0, title: "", body: "", authorUserName: "", authorUserId: "", likes: 0, userLiked: false, numComments: 0, createdDate: "")]
+    var posts = [Post]()
     var pageNumber = 0
+    let secret = User.current?.secret
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +35,14 @@ class AllPostsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let toOtherProfile = segue.destination as? OtherProfileViewController, let userId = sender as? String {
+        if let toOtherProfile = segue.destination as? OtherProfileViewController, let userId = sender as? String, let secret = secret {
             toOtherProfile.userId = userId
+            toOtherProfile.secret = secret
         }
         
-        if let toComments = segue.destination as? CommetsViewController, let postid = sender as? Int {
+        if let toComments = segue.destination as? CommetsViewController, let postid = sender as? Int, let secret = secret {
             toComments.postid = postid
+            toComments.secret = secret
         }
     }
     

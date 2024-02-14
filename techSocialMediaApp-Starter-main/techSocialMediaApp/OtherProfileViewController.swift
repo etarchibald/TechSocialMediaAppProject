@@ -17,6 +17,7 @@ class OtherProfileViewController: UIViewController {
     
     var userProfile = UserProfile(firstName: "", lastName: "", userName: "", userUUID: UUID(), bio: "", techInterests: "", posts: [])
     var userId: String?
+    var secret: UUID?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +36,10 @@ class OtherProfileViewController: UIViewController {
     }
     
     func fetchUserProfile() {
-        guard userId != "" else { return }
+        guard userId != "", let secret = secret else { return }
         Task {
             do {
-                let profileFetchRequest = techSocialMediaApp.fetchUserProfile(userUUID: UUID(uuidString: userId!)!, secret: User.current!.secret)
+                let profileFetchRequest = techSocialMediaApp.fetchUserProfile(userUUID: UUID(uuidString: userId!)!, secret: secret)
                 userProfile = try await APIController.shared.sendRequest(profileFetchRequest)
                 updateUI()
                 collectionView.reloadData()

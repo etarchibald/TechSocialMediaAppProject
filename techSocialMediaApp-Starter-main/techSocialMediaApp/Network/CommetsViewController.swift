@@ -14,6 +14,7 @@ class CommetsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var comments = [Comment(commentId: 0, body: "", userName: "", userId: "", createdDate: "")]
+    var secret: UUID?
     var postid: Int?
     var pageNumber = 0
     
@@ -25,8 +26,9 @@ class CommetsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let toOtherProfile = segue.destination as? OtherProfileViewController, let userId = sender as? String {
+        if let toOtherProfile = segue.destination as? OtherProfileViewController, let userId = sender as? String, let secret = secret {
             toOtherProfile.userId = userId
+            toOtherProfile.secret = secret
         }
     }
     

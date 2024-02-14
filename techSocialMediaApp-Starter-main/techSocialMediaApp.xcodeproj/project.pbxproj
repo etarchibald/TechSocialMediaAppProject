@@ -113,10 +113,10 @@
 			isa = PBXGroup;
 			children = (
 				4AA5E26B2B73D0C900B89431 /* APIController.swift */,
+				A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */,
 				4AA5E2632B6D9C7C00B89431 /* AddEditPost.swift */,
 				4AA5E26F2B73ECB800B89431 /* CommentController.swift */,
 				4AA5E2732B76709C00B89431 /* LikeController.swift */,
-				A3C2D4CE29082B1300C0AF5F /* AuthenticationController.swift */,
 				4AA5E2492B6AA8C100B89431 /* EditProfileController.swift */,
 				4AA5E21B2B695F3500B89431 /* UserProfileController.swift */,
 			);
