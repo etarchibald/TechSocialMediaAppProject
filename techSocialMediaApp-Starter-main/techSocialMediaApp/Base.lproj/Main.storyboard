@@ -323,7 +323,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c6j-Hj-2l2">
-                                <rect key="frame" x="16" y="348" width="358" height="413"/>
+                                <rect key="frame" x="0.0" y="348" width="390" height="413"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Lks-Km-ygp">
                                     <size key="itemSize" width="128" height="128"/>
@@ -333,7 +333,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="post" id="kFs-dd-2Y3" customClass="PostsCollectionViewCell" customModule="techSocialMediaApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="358" height="179"/>
+                                        <rect key="frame" x="16" y="0.0" width="358" height="179"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xUN-LY-Czj">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="179"/>
@@ -458,9 +458,9 @@
                             <constraint firstItem="rxS-hm-6sN" firstAttribute="centerX" secondItem="iSs-rZ-K0L" secondAttribute="centerX" id="Pwc-H3-iyd"/>
                             <constraint firstItem="rxS-hm-6sN" firstAttribute="top" secondItem="hzI-e5-WXF" secondAttribute="top" id="V6C-8B-Kkl"/>
                             <constraint firstItem="c6j-Hj-2l2" firstAttribute="bottom" secondItem="hzI-e5-WXF" secondAttribute="bottom" id="WMs-Fz-pHl"/>
-                            <constraint firstItem="hzI-e5-WXF" firstAttribute="trailing" secondItem="c6j-Hj-2l2" secondAttribute="trailing" constant="16" id="i3l-C4-ZSa"/>
+                            <constraint firstItem="hzI-e5-WXF" firstAttribute="trailing" secondItem="c6j-Hj-2l2" secondAttribute="trailing" id="i3l-C4-ZSa"/>
                             <constraint firstItem="hzI-e5-WXF" firstAttribute="trailing" secondItem="Ywe-0D-4ZR" secondAttribute="trailing" constant="16" id="koG-YC-FUh"/>
-                            <constraint firstItem="c6j-Hj-2l2" firstAttribute="leading" secondItem="hzI-e5-WXF" secondAttribute="leading" constant="16" id="o61-B4-IDE"/>
+                            <constraint firstItem="c6j-Hj-2l2" firstAttribute="leading" secondItem="hzI-e5-WXF" secondAttribute="leading" id="o61-B4-IDE"/>
                             <constraint firstItem="qhS-SJ-AVP" firstAttribute="top" secondItem="Ywe-0D-4ZR" secondAttribute="bottom" constant="14" id="sjh-IZ-DNm"/>
                             <constraint firstItem="Ywe-0D-4ZR" firstAttribute="centerX" secondItem="iSs-rZ-K0L" secondAttribute="centerX" id="suC-el-FfU"/>
                             <constraint firstItem="Ywe-0D-4ZR" firstAttribute="leading" secondItem="hzI-e5-WXF" secondAttribute="leading" constant="16" id="wyE-NT-3ga"/>
@@ -504,7 +504,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f0A-jN-uDc">
-                                <rect key="frame" x="16" y="91" width="358" height="712"/>
+                                <rect key="frame" x="0.0" y="91" width="390" height="712"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3lz-sS-7ad">
                                     <size key="itemSize" width="128" height="128"/>
@@ -514,7 +514,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="post" id="M8R-WW-92O" customClass="PostsCollectionViewCell" customModule="techSocialMediaApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="358" height="179"/>
+                                        <rect key="frame" x="16" y="0.0" width="358" height="179"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="G7g-iF-sr1">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="179"/>
@@ -636,8 +636,8 @@
                         <viewLayoutGuide key="safeArea" id="wW5-Ll-NV7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="f0A-jN-uDc" firstAttribute="leading" secondItem="wW5-Ll-NV7" secondAttribute="leading" constant="16" id="1Qv-Ff-ihA"/>
-                            <constraint firstItem="wW5-Ll-NV7" firstAttribute="trailing" secondItem="f0A-jN-uDc" secondAttribute="trailing" constant="16" id="A0e-nb-HkS"/>
+                            <constraint firstItem="f0A-jN-uDc" firstAttribute="leading" secondItem="wW5-Ll-NV7" secondAttribute="leading" id="1Qv-Ff-ihA"/>
+                            <constraint firstItem="wW5-Ll-NV7" firstAttribute="trailing" secondItem="f0A-jN-uDc" secondAttribute="trailing" id="A0e-nb-HkS"/>
                             <constraint firstAttribute="bottom" secondItem="f0A-jN-uDc" secondAttribute="bottom" constant="41" id="MyN-Sb-don"/>
                             <constraint firstItem="f0A-jN-uDc" firstAttribute="top" secondItem="wW5-Ll-NV7" secondAttribute="top" id="j0g-rv-SaP"/>
                         </constraints>
@@ -839,7 +839,7 @@
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8ew-qi-GKy">
-                                <rect key="frame" x="16" y="313" width="358" height="453"/>
+                                <rect key="frame" x="0.0" y="313" width="390" height="453"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="U1O-M5-rw2">
                                     <size key="itemSize" width="128" height="128"/>
@@ -849,7 +849,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="post" id="VxK-C2-ZSK" customClass="PostsCollectionViewCell" customModule="techSocialMediaApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="358" height="179"/>
+                                        <rect key="frame" x="16" y="0.0" width="358" height="179"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="UWA-c0-S7t">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="179"/>
@@ -968,10 +968,10 @@
                         <viewLayoutGuide key="safeArea" id="BxJ-gZ-EDh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8ew-qi-GKy" firstAttribute="leading" secondItem="BxJ-gZ-EDh" secondAttribute="leading" constant="16" id="4eO-TW-GPp"/>
+                            <constraint firstItem="8ew-qi-GKy" firstAttribute="leading" secondItem="BxJ-gZ-EDh" secondAttribute="leading" id="4eO-TW-GPp"/>
                             <constraint firstItem="bLS-cu-Qop" firstAttribute="leading" secondItem="BxJ-gZ-EDh" secondAttribute="leading" constant="16" id="6X1-kc-zyQ"/>
                             <constraint firstItem="8ew-qi-GKy" firstAttribute="top" secondItem="bLS-cu-Qop" secondAttribute="bottom" constant="8" symbolic="YES" id="DHO-Pg-2LP"/>
-                            <constraint firstItem="BxJ-gZ-EDh" firstAttribute="trailing" secondItem="8ew-qi-GKy" secondAttribute="trailing" constant="16" id="P78-Aw-Pci"/>
+                            <constraint firstItem="BxJ-gZ-EDh" firstAttribute="trailing" secondItem="8ew-qi-GKy" secondAttribute="trailing" id="P78-Aw-Pci"/>
                             <constraint firstItem="BxJ-gZ-EDh" firstAttribute="trailing" secondItem="bLS-cu-Qop" secondAttribute="trailing" constant="16" id="QtT-fw-oBQ"/>
                             <constraint firstAttribute="bottom" secondItem="8ew-qi-GKy" secondAttribute="bottom" constant="78" id="hF8-i6-Qo5"/>
                             <constraint firstItem="bLS-cu-Qop" firstAttribute="top" secondItem="BxJ-gZ-EDh" secondAttribute="top" id="xX9-Fv-e1E"/>
@@ -988,7 +988,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d0O-zk-S2g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2420" y="2219"/>
+            <point key="canvasLocation" x="2420" y="2218.7203791469192"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Mmc-OF-Gyj">
@@ -1009,11 +1009,11 @@
             </objects>
             <point key="canvasLocation" x="1490.7692307692307" y="683.88625592417054"/>
         </scene>
-        <!--profile-->
+        <!--Profile-->
         <scene sceneID="xeu-Za-kCP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="11B-Hi-igq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="profile" image="person.circle.fill" catalog="system" id="Hyb-sr-Jcz"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle.fill" catalog="system" id="Hyb-sr-Jcz"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yVs-pI-qXk">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
@@ -1194,7 +1194,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="4zl-nU-RsJ"/>
         <segue reference="rjr-cf-poR"/>
-        <segue reference="5tL-US-EJi"/>
+        <segue reference="Wjf-ns-jTi"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bubble.right.fill" catalog="system" width="128" height="110"/>

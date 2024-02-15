@@ -25,6 +25,7 @@ class AllPostsViewController: UIViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.4)), repeatingSubitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
         collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(section: section)
         
         fetchPosts(pageNumber: pageNumber)
